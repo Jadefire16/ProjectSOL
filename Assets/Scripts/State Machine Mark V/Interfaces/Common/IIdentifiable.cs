@@ -1,6 +1,6 @@
 ﻿namespace JadesToolkit.Experimental.StateMachine
 {
-    public interface IIdentifiable<T>
+    public interface IIdentifiable<T> : IIdentifiable
     {
         T Identifier { get; }
         T GetIdentifier();

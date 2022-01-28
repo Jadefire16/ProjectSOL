@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using UnityEngine;
 namespace JadesToolkit.Experimental.StateMachine
 {
-    //The runtime state layer, edit time will be converted into one of these puppies
+    //The runtime state layer, edit time will be converted into one of these
     public class StateCollection : IStateCollection
     {
         public long Identifier => id;
@@ -47,16 +47,23 @@ namespace JadesToolkit.Experimental.StateMachine
                     list.Add(transition);
             }
         }
-        public IEnumerable<ITransition> GetCurrentTransitions<T>() where T : IState => allTransitions[typeof(T)];
+        public IEnumerable<ITransition> GetCurrentTransitions<T>() where T : IState
+        {
+            return allTransitions[typeof(T)];
+        }
 
         public long GetIdentifier() => id;
-        public bool Matches(long other) => this.id.Equals(other);
 
         public IEnumerable<ITransition> GetCurrentTransitions(Type type)
         {
-            if (!(type is IState))
-                return null;
             return allTransitions[type];
+        }
+        public bool Matches(long other) => id.Equals(other);
+        public bool Matches(object other)
+        {
+            if (!(other is long otherID))
+                return false;
+            return Matches(otherID);
         }
     }
 }

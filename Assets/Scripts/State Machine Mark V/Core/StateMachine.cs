@@ -10,8 +10,8 @@ namespace JadesToolkit.Experimental.StateMachine
         private readonly IUpdateServiceProvider updateService;
         private readonly ITransitionResolutionProvider transitionResolverService;
         private readonly ILayeredStateCollection layeredStateCollection;
-        private readonly IStateCollection currentStateCollection;
 
+        private IStateCollection currentStateCollection;
         private IState currentState;
 
         private Type StateType => currentState.GetType();
@@ -21,13 +21,20 @@ namespace JadesToolkit.Experimental.StateMachine
             this.updateService = updateService;
             this.transitionResolverService = transitionResolverService;
             this.layeredStateCollection = layeredStateCollection;
+        }
 
+        public void Initialize()
+        {
             currentStateCollection = layeredStateCollection.GetCollectionAt(0);
             currentState = currentStateCollection.EntryState;
+            updateService.SetUpdateResolver(currentState);
+            currentState.OnEnter();
         }
 
         public void Tick()
         {
+            Debug.Log($"State type is currently {StateType.Name}\nCurrent state collection is null? {currentStateCollection == null} \nTransition Resolver service is null? {transitionResolverService == null} ");
+            Debug.Log($"What is this returning? {currentStateCollection.GetCurrentTransitions(StateType) == null}");
             var transition = transitionResolverService.GetFirstValidTransition(currentStateCollection.GetCurrentTransitions(StateType));
             if (transition == null)
                 return;
@@ -39,7 +46,7 @@ namespace JadesToolkit.Experimental.StateMachine
             currentState.OnExit();
             currentState = transition.GetTransitionState();
             currentState.OnEnter();
-            updateService.SetUpdateResolver(currentState.GetUpdateResolver());
+            updateService.SetUpdateResolver(currentState);
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-
+using UnityEngine;
 namespace JadesToolkit.Experimental.StateMachine
 {
     public class TransitionResolver : ITransitionResolutionProvider
@@ -14,8 +14,10 @@ namespace JadesToolkit.Experimental.StateMachine
         }
         public ITransition GetFirstValidTransition(IEnumerable<ITransition> transitions)
         {
+            Debug.Assert(transitions != null);
             foreach (var transition in transitions)
             {
+                Debug.Assert(transition != null);
                 if (transition.ConditionMet())
                     return transition;
             }

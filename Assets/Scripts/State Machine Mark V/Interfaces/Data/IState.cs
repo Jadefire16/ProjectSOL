@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace JadesToolkit.Experimental.StateMachine
 {
-    public interface IState : IIdentifiable<long>, IUpdateResolver 
+    public interface IState : IUpdateResolver 
     {
         void OnEnter();
         void OnExit();
-        void OnDestroy();
     }
 }
