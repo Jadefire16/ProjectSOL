@@ -1,4 +1,5 @@
-﻿using JadesToolkit.Experimental.StateMachine;
+﻿using JadesToolkit.StateOfLife.Chronos.Updating;
+using JadesToolkit.StateOfLife.Core;
 using UnityEngine;
 public class StateThree : IState
 {
@@ -17,13 +18,12 @@ public class StateThree : IState
     public void OnExit()
     {
         Debug.Log("State three exited!");
-
     }
 
-    public void Resolve<T>() where T : IStateUpdate
+    public void Resolve<T>() where T : IStateCycle
     {
         var type = typeof(T);
-        if (!(type is ILateUpdate))
+        if (!(type is ILateCycle))
             return;
         LateUpdate();
     }

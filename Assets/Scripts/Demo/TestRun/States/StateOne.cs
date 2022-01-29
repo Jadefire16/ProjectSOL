@@ -1,4 +1,5 @@
-﻿using JadesToolkit.Experimental.StateMachine;
+﻿using JadesToolkit.StateOfLife.Chronos.Updating;
+using JadesToolkit.StateOfLife.Core;
 using UnityEngine;
 
 public class StateOne : IState
@@ -21,10 +22,10 @@ public class StateOne : IState
 
     }
 
-    public void Resolve<T>() where T : IStateUpdate
+    public void Resolve<T>() where T : IStateCycle
     {
         var type = typeof(T);
-        if (!(type is IUpdate))
+        if (!(type is IStateCycle))
             return;
         Update();
     }

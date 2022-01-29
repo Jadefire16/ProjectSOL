@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using JadesToolkit.StateOfLife.Chronos.Updating;
+using JadesToolkit.StateOfLife.Transitioning;
+using JadesToolkit.StateOfLife.Collections;
 using UnityEngine;
+using System;
 
-namespace JadesToolkit.Experimental.StateMachine
+namespace JadesToolkit.StateOfLife.Core
 {
     public class StateMachine
     {

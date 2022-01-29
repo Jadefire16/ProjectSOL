@@ -1,9 +1,6 @@
-﻿using JadesToolkit.Experimental.StateMachine;
+﻿using JadesToolkit.StateOfLife.Transitioning;
+using JadesToolkit.StateOfLife.Core;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class DemoTransition : ITransition
 {
     private readonly Func<bool> condition;

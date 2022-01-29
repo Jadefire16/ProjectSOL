@@ -1,6 +1,7 @@
-﻿using JadesToolkit.Experimental.StateMachine;
-using System.Collections;
-using System.Collections.Generic;
+﻿using JadesToolkit.StateOfLife.Chronos.Updating;
+using JadesToolkit.StateOfLife.Transitioning;
+using JadesToolkit.StateOfLife.Collections;
+using JadesToolkit.StateOfLife.Core;
 using UnityEngine;
 
 public class StateController : MonoBehaviour

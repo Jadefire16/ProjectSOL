@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JadesToolkit.Experimental.Exceptions
+namespace JadesToolkit.Common.Exceptions
 {
     [Serializable]
     public class InvalidStateException : Exception
