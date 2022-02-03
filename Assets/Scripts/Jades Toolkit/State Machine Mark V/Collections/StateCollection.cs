@@ -50,14 +50,14 @@ namespace JadesToolkit.StateOfLife.Collections
                     list.Add(transition);
             }
         }
-        public IEnumerable<ITransition> GetCurrentTransitions<T>() where T : IState
+        public IReadOnlyList<ITransition> GetCurrentTransitions<T>() where T : IState
         {
             return allTransitions[typeof(T)];
         }
 
         public long GetIdentifier() => id;
 
-        public IEnumerable<ITransition> GetCurrentTransitions(Type type)
+        public IReadOnlyList<ITransition> GetCurrentTransitions(Type type)
         {
             return allTransitions[type];
         }

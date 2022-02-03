@@ -19,7 +19,6 @@ public class StateOne : IState
     public void OnExit()
     {
         Debug.Log("State one exited!");
-
     }
 
     public void Resolve<T>() where T : IStateCycle

@@ -25,15 +25,22 @@ namespace JadesToolkit.StateOfLife.Collections
         }
         public void RemoveCollectionAt(int index)
         {
-            if (index > stateCollections.Count | index < 0)
+            if (index > stateCollections.Count -1 | index < 0)
                 throw new IndexOutOfRangeException($"The index must not be less than zero or greater than the end index \n Index:{index}");
             stateCollections.RemoveAt(index);
         }
         public IStateCollection GetCollectionAt(int index)
         {
-            if (index > stateCollections.Count | index < 0)
+            if (index > stateCollections.Count -1 | index < 0)
                 throw new IndexOutOfRangeException($"The index must not be less than zero or greater than the end index \n Index:{index}");
             return stateCollections[index];
+        }
+        public bool TryGetCollectionAt(int index, out IStateCollection collection)
+        {
+            if (index > stateCollections.Count -1 | index < 0)
+                throw new IndexOutOfRangeException($"The index must not be less than zero or greater than the end index \n Index:{index}");
+            collection = stateCollections[index];
+            return collection != null;
         }
         public IEnumerable<IStateCollection> GetStateCollections()
         {
@@ -45,5 +52,6 @@ namespace JadesToolkit.StateOfLife.Collections
                 }
             }
         }
+
     }
 }

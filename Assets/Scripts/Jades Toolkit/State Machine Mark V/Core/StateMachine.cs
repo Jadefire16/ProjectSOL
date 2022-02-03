@@ -1,6 +1,7 @@
 ﻿using JadesToolkit.StateOfLife.Chronos.Updating;
 using JadesToolkit.StateOfLife.Transitioning;
 using JadesToolkit.StateOfLife.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using System;
 
@@ -8,16 +9,19 @@ namespace JadesToolkit.StateOfLife.Core
 {
     public class StateMachine
     {
-        private readonly IUpdateServiceProvider updateService;
-        private readonly ITransitionResolutionProvider transitionResolverService;
-        private readonly ILayeredStateCollection layeredStateCollection;
+        public Type StateType => currentState.GetType();
+
+        private IUpdateServiceProvider updateService;
+        private ITransitionResolutionProvider<ITransition> transitionResolverService;
+        private ILayeredStateCollection layeredStateCollection;
 
         private IStateCollection currentStateCollection;
+        private List<ITransition> currentTransitions = new List<ITransition>(16);
+        private List<ITransition> validTransitions = new List<ITransition>(16);
+
         private IState currentState;
 
-        private Type StateType => currentState.GetType();
-        
-        public StateMachine(IUpdateServiceProvider updateService, ITransitionResolutionProvider transitionResolverService, ILayeredStateCollection layeredStateCollection)
+        public StateMachine(IUpdateServiceProvider updateService, ITransitionResolutionProvider<ITransition> transitionResolverService, ILayeredStateCollection layeredStateCollection)
         {
             this.updateService = updateService;
             this.transitionResolverService = transitionResolverService;
@@ -29,23 +33,23 @@ namespace JadesToolkit.StateOfLife.Core
             currentStateCollection = layeredStateCollection.GetCollectionAt(0);
             currentState = currentStateCollection.EntryState;
             updateService.SetUpdateResolver(currentState);
+            currentTransitions = currentStateCollection.GetCurrentTransitions(StateType) as List<ITransition>;
             currentState.OnEnter();
         }
 
         public void Tick()
         {
-            Debug.Log($"State type is currently {StateType.Name}\nCurrent state collection is null? {currentStateCollection == null} \nTransition Resolver service is null? {transitionResolverService == null} ");
-            Debug.Log($"What is this returning? {currentStateCollection.GetCurrentTransitions(StateType) == null}");
-            var transition = transitionResolverService.GetFirstValidTransition(currentStateCollection.GetCurrentTransitions(StateType));
-            if (transition == null)
+            validTransitions.Clear();
+            if (!transitionResolverService.TryGetValidTransitions<List<ITransition>>(currentTransitions, validTransitions))
                 return;
-            Transition(transition);
+            Transition(validTransitions[0]);
         }
 
         private void Transition(ITransition transition)
         {
             currentState.OnExit();
             currentState = transition.GetTransitionState();
+            currentTransitions = currentStateCollection.GetCurrentTransitions(StateType) as List<ITransition>;
             currentState.OnEnter();
             updateService.SetUpdateResolver(currentState);
         }
