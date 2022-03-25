@@ -6,6 +6,8 @@ public class StateOne : IState
 {
     public IUpdateResolver GetUpdateResolver() => this;
     Transform t;
+    public string StateName { get; protected set; }
+
     public StateOne(Transform t)
     {
         this.t = t;

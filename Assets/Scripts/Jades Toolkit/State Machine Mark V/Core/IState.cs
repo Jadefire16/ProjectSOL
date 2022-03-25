@@ -8,3 +8,4 @@ namespace JadesToolkit.StateOfLife.Core
         void OnExit();
     }
 }
+// TODO remove the UpdateResolver interface inheritance, it causes a bottle neck in Unity's environment which makes it feel clunky

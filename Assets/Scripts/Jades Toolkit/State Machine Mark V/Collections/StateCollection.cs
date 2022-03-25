@@ -6,7 +6,6 @@ using System;
 
 namespace JadesToolkit.StateOfLife.Collections
 {
-    //The runtime state layer, edit time will be converted into one of these
     public class StateCollection : IStateCollection
     {
         public long Identifier => id;
