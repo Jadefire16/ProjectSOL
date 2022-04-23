@@ -1,7 +1,7 @@
 ﻿using JadesToolkit.StateOfLife.Chronos.Updating;
 using JadesToolkit.StateOfLife.Core;
 using UnityEngine;
-public class StateThree : IState
+public class StateThree : IState, IUpdateResolver
 {
     public IUpdateResolver GetUpdateResolver() => this;
     Transform t;

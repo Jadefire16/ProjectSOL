@@ -9,7 +9,7 @@ namespace JadesToolkit.StateOfLife.Collections
     {
         IState EntryState { get; }
         void AddStateOfType<T>() where T : IState;
-        void AddTransition<T>(ITransition transition) where T : IState;
+        void AddTransition<T>(ITransition transition, int defaultSize = 1) where T : IState;
         void AddTranstions<T>(IEnumerable<ITransition> transitions) where T : IState;
         IReadOnlyList<ITransition> GetCurrentTransitions<T>() where T : IState;
         IReadOnlyList<ITransition> GetCurrentTransitions(Type type);

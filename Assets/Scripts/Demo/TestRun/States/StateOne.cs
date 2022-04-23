@@ -2,7 +2,7 @@
 using JadesToolkit.StateOfLife.Core;
 using UnityEngine;
 
-public class StateOne : IState
+public class StateOne : IState, IUpdateResolver
 {
     public IUpdateResolver GetUpdateResolver() => this;
     Transform t;
