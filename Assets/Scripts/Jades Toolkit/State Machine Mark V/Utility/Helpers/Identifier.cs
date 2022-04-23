@@ -4,12 +4,12 @@ using System;
 
 namespace JadesToolkit.StateOfLife.Utility
 {
-    public static class IdentifierHelper
+    public static class Identifier
     {
         private static readonly HashSet<long> usedIdentifiers = new HashSet<long>();
         private static readonly RandomNumberGenerator rand;
 
-        static IdentifierHelper()
+        static Identifier()
         {
             rand = RandomNumberGenerator.Create();
         }
