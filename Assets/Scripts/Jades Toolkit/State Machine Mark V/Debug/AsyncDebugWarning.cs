@@ -12,7 +12,7 @@ namespace JadesToolkit.StateOfLife.Debugging
         /// <param name="message"><inheritdoc cref="UnityEngine.Debug.LogWarning(object)"/></param>
         /// <param name="token"></param>
         /// <param name="configureAwait"></param>
-        public async static void WarnAsync(string message, CancellationToken token = default, bool configureAwait = true) => await Task.Run(() => Debug.LogWarning(message), token == default ? CancellationToken.None : token).ConfigureAwait(configureAwait);
+        public static async void LogWarning(string message, CancellationToken token = default, bool configureAwait = true) => await Task.Run(() => Debug.LogWarning(message), token == default ? CancellationToken.None : token).ConfigureAwait(configureAwait);
 
         /// <summary>
         /// <inheritdoc cref="UnityEngine.Debug.LogWarning(object, Object)"/>
@@ -21,6 +21,6 @@ namespace JadesToolkit.StateOfLife.Debugging
         /// <param name="obj"><inheritdoc cref="UnityEngine.Debug.LogWarning(object, Object)"/></param>
         /// <param name="token"></param>
         /// <param name="configureAwait"></param>
-        public async static void WarnAsync(object message, Object obj, CancellationToken token = default, bool configureAwait = true) => await Task.Run(() => Debug.LogWarning(message, obj), token == default ? CancellationToken.None : token).ConfigureAwait(configureAwait);
+        public static async void LogWarning(object message, Object obj, CancellationToken token = default, bool configureAwait = true) => await Task.Run(() => Debug.LogWarning(message, obj), token == default ? CancellationToken.None : token).ConfigureAwait(configureAwait);
     }
 }
